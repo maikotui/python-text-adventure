@@ -3,7 +3,7 @@ import command_parser
 
 def main():
     """Main runner for game"""
-    game_is_active = True;
+    game_is_active = True
     while(game_is_active):
         #system('cls')
         print("type a command")
