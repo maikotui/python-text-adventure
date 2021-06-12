@@ -1,20 +1,23 @@
 import re
 
 # A collection of regex searches used by the command parser
+# TODO: regex does not include implementation for action aliases
 re_dict = {
     'use_obj': re.compile(r'^use (\w+)$'),
     'use_obj_on_obj': re.compile(r'^use (\w+) on (\w+)$'),
     'take_obj': re.compile(r'^take (\w+)$'),
     'take_obj_from_obj': re.compile(r'^take (\w+) from (\w+)$'),
-    'inspect_obj': re.compile(r'^inspect (\w+)$')
+    'inspect_obj': re.compile(r'^inspect (\w+)$'),
+    'talk_with_obj': re.compile(r'^inspect (\w+)$'r''),
 }
 
-# Alternative names for each of the four key actions
+# Alternative names for each of the five key actions
 action_aliases = {
     'use': "use interact operate weild utilize",
     'take': "take store grab hold",
     'inspect': "inspect examine investigate check probe survey",
-    'turn': "turn look glance peer"
+    'turn': "turn look glance peer",
+    'talk': "talk chat"
 }
 
 # Accepted directions used by the "turn" command
@@ -89,5 +92,16 @@ def simple_parse(command):
     # It accepts the statement "turn x" where x is a direction.
     if any(x in split_command[0].lower() for x in action_aliases['turn'].split()):
         parsed_command['action'] = 'turn'
+        # TODO: Finish implementation
+
+    # This section parses the 'talk' command.
+    if any(x in split_command[0].lower() for x in action_aliases['talk'].split()):
+        parsed_command['action'] = 'talk'
+        m1 = re_dict['talk_with_obj'].match(command)
+        if(m1):  # TODO: Add 'inspect direction' implementation
+            parsed_command['primary_object'] = m1.group(1)
+            parsed_command['valid_command'] = True
+            return parsed_command
+
 
     return parsed_command
