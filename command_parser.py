@@ -15,7 +15,7 @@ re_dict = {
 action_aliases = {
     'use': "use interact operate weild utilize",
     'take': "take store grab hold",
-    'inspect': "inspect examine investigate check probe survey",
+    'inspect': "inspect search examine investigate check probe survey",
     'turn': "turn look glance peer",
     'talk': "talk chat"
 }
@@ -98,7 +98,7 @@ def simple_parse(command):
     if any(x in split_command[0].lower() for x in action_aliases['talk'].split()):
         parsed_command['action'] = 'talk'
         m1 = re_dict['talk_with_obj'].match(command)
-        if(m1):  # TODO: Add 'inspect direction' implementation
+        if(m1): 
             parsed_command['primary_object'] = m1.group(1)
             parsed_command['valid_command'] = True
             return parsed_command
