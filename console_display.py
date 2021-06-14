@@ -1,8 +1,14 @@
+import game_display
+
 # importing the necessary packages
 import time
 import sys
 import os
   
+class console_diplsay(game_display):
+    def __init__(self):
+        pass
+
 # Function for implementing the loading animation
 def load_animation():
   
