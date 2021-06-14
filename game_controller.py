@@ -1,16 +1,11 @@
-import game_display
+import views
 
-class game_controller:
-    def __init__(self, d) -> None:
-        if(isinstance(d, game_display.game_display)):
-            self._display = d
+class Controller:
+    def __init__(self, view) -> None:
+        if(isinstance(view, views.View)):
+            self._display = view
         else:
             raise TypeError
 
     def start_game(self):
         pass
-
-if(__name__ == "__main__"):
-    x = game_display.game_display()
-    y = game_controller(x)
-    print("success")
